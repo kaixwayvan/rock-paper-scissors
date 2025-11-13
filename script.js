@@ -50,15 +50,15 @@ buttons.forEach((button) => {
     let img = button.querySelector("img");
     switch (button.id) {
       case "rock":
-        img.src = "/assets/rock-hover.png";
+        img.src = "assets/rock-hover.png";
         break;
 
       case "paper":
-        img.src = "/assets/paper-hover.png";
+        img.src = "assets/paper-hover.png";
         break;
 
       case "scissors":
-        img.src = "/assets/scissors-hover.png";
+        img.src = "assets/scissors-hover.png";
         break;
     }
   });
@@ -70,15 +70,15 @@ buttons.forEach((button) => {
     let img = button.querySelector("img");
     switch (button.id) {
       case "rock":
-        img.src = "/assets/rock.png";
+        img.src = "assets/rock.png";
         break;
 
       case "paper":
-        img.src = "/assets/paper.png";
+        img.src = "assets/paper.png";
         break;
 
       case "scissors":
-        img.src = "/assets/scissors.png";
+        img.src = "assets/scissors.png";
         break;
     }
   });
