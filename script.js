@@ -1,7 +1,30 @@
-// Rock, Paper, Scissors
-
 let humanScore = 0;
 let computerScore = 0;
+let userMove = "";
+let computerMove = "";
+
+function getMoves(event) {
+  const button = event.currentTarget;
+  switch (button.id) {
+    case "rock":
+      userMove = "rock";
+      break;
+
+    case "paper":
+      userMove = "paper";
+      break;
+
+    case "scissors":
+      userMove = "scissors";
+      break;
+  }
+
+  computerMove = getComputerChoice();
+  console.log("User chose:", userMove);
+  console.log("Computer chose:", computerMove);
+
+  playRound();
+}
 
 function getComputerChoice() {
   const indicator = Math.floor(Math.random() * 3);
@@ -15,81 +38,109 @@ function getComputerChoice() {
   }
 }
 
-function playRound(userMove, computerMove) {
-  let result;
+const buttons = document.querySelectorAll("button");
 
-  console.log(`\nYou chose ${userMove}.`);
-  console.log(`The computer chose ${computerMove}.\n`);
+buttons.forEach((button) => {
+  button.addEventListener("click", getMoves);
+});
 
+buttons.forEach((button) => {
+  button.addEventListener("mouseenter", (event) => {
+    const button = event.currentTarget;
+    let img = button.querySelector("img");
+    switch (button.id) {
+      case "rock":
+        img.src = "/assets/rock-hover.png";
+        break;
+
+      case "paper":
+        img.src = "/assets/paper-hover.png";
+        break;
+
+      case "scissors":
+        img.src = "/assets/scissors-hover.png";
+        break;
+    }
+  });
+});
+
+buttons.forEach((button) => {
+  button.addEventListener("mouseleave", (event) => {
+    const button = event.currentTarget;
+    let img = button.querySelector("img");
+    switch (button.id) {
+      case "rock":
+        img.src = "/assets/rock.png";
+        break;
+
+      case "paper":
+        img.src = "/assets/paper.png";
+        break;
+
+      case "scissors":
+        img.src = "/assets/scissors.png";
+        break;
+    }
+  });
+});
+
+const displayTitleRemark = document.getElementById("title");
+const displayDescriptionRemark = document.getElementById("description");
+const displayHumanScore = document.getElementById("human-score");
+const displayComputerScore = document.getElementById("computer-score");
+const displayResult = document.getElementById("results");
+const displayModal = document.getElementById("modal");
+const restartButton = document.getElementById("restart");
+const remark = document.getElementById("remark");
+const overlay = document.getElementById("overlay");
+
+function determineWinner() {
   if (userMove === computerMove) {
-    result = "It's a tie!";
+    displayTitleRemark.textContent = "It's a tie!";
+    displayDescriptionRemark.textContent =
+      userMove + " doesn't beat " + computerMove;
   } else if (
     (userMove === "rock" && computerMove === "scissors") ||
     (userMove === "paper" && computerMove === "rock") ||
     (userMove === "scissors" && computerMove === "paper")
   ) {
     humanScore++;
-    result = "You win! " + userMove + " beats " + computerMove;
+    displayTitleRemark.textContent = "You win!";
+    displayDescriptionRemark.textContent = userMove + " beats " + computerMove;
   } else {
     computerScore++;
-    result = "You lose! " + computerMove + " beats " + userMove;
-  }
-
-  return result;
-}
-
-function playGame() {
-  console.log(`
-        Welcome to Rock, Paper, Scissors!
-        Choose one:
-        - rock
-        - paper
-        - scissors
-        `);
-
-  for (let rounds = 0; rounds < 5; rounds++) {
-    let userMove = prompt("What is your move?");
-
-    if (!userMove) {
-      console.log("Game cancelled.");
-      return;
-    }
-
-    userMove = userMove.toLowerCase();
-
-    if (
-      !(userMove === "rock" || userMove === "paper" || userMove === "scissors")
-    ) {
-      console.log("Please enter a valid move. Try again!");
-      continue;
-    }
-
-    const computerMove = getComputerChoice();
-
-    const result = playRound(userMove, computerMove);
-    console.log(result);
-
-    console.log(`
-            Scoreboard:
-            Human    : ${humanScore}
-            Computer : ${computerScore}
-          `);
-  }
-
-  console.log("GAME OVER");
-  console.log(`
-            Final Scoreboard:
-            Human    : ${humanScore}
-            Computer : ${computerScore}
-          \n`);
-
-  if (humanScore > computerScore) {
-    console.log("You win the game!");
-  } else if (computerScore > humanScore) {
-    console.log("Computer wins the game!");
-  } else {
-    console.log("The game is a tie!");
+    displayTitleRemark.textContent = "Computer wins!";
+    displayDescriptionRemark.textContent = computerMove + " beats " + userMove;
   }
 }
 
-playGame();
+function playRound() {
+  determineWinner();
+  displayHumanScore.textContent = ` ${humanScore}`;
+  displayComputerScore.textContent = ` ${computerScore}`;
+  if (humanScore === 5 || computerScore === 5) {
+    displayModal.style.display = "flex";
+    overlay.style.display = "flex";
+
+    if (humanScore === 5) {
+      remark.textContent = "You won the game!";
+    } else {
+      remark.textContent = "Computer won the game!";
+    }
+  }
+}
+
+restartButton.addEventListener("click", () => {
+  humanScore = 0;
+  computerScore = 0;
+
+  displayHumanScore.textContent = humanScore;
+  displayComputerScore.textContent = computerScore;
+
+  displayModal.style.display = "none";
+  overlay.style.display = "none";
+
+  displayTitleRemark.textContent = "Ready, set, play!";
+  displayDescriptionRemark.textContent =
+      "Reach 5 points before your opponent to win.";
+});
