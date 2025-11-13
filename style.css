@@ -1,0 +1,166 @@
+@import url("https://fonts.googleapis.com/css2?family=Momo+Trust+Display&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+body {
+  background: linear-gradient(
+    129deg,
+    rgba(199, 184, 149, 1) 0%,
+    rgba(214, 181, 109, 1) 80%
+  );
+  background-attachment: fixed;
+  background-size: cover;
+  font-family: Momo Trust Display, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: rgb(250, 243, 212);
+}
+
+h1 {
+  margin-top: 40px;
+}
+
+#display {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: rgb(255, 223, 164);
+}
+
+#title {
+  font-size: 30px;
+  margin-bottom: 0;
+  color: #ffe76d;
+}
+
+#description {
+  color: #ffd500;
+  font-weight: 200;
+  font-size: 15px;
+}
+
+#score-container {
+  width: 500px;
+  display: flex;
+  justify-content: space-evenly;
+  color: rgb(255, 223, 164);
+}
+
+.score-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+#human-score,
+#computer-score {
+  margin: 0;
+  font-size: 20px;
+}
+
+#btn-container {
+  padding: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+#btn-container > button {
+  width: 100px;
+  height: 100px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff6cf;
+  border: 1px solid rgb(210, 199, 160);
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(102, 78, 0, 0.3);
+  font-family: Momo Trust Display, sans-serif;
+  font-size: larger;
+  color: rgb(237, 148, 4);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button > img {
+  width: 50px;
+  height: 60px;
+}
+
+#btn-container > button:hover {
+  background-color: rgb(98, 53, 19);
+  color: #f8d864;
+  transform: scale(1.05);
+}
+
+button:hover img {
+  content: url("");
+}
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 10;
+}
+
+#modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  width: 30%;
+  height: 30%;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid rgb(110, 75, 16);
+  border-radius: 20px;
+  background-color: #fff9d8;
+  color: rgb(108, 73, 5);
+  gap: 30px;
+  font-size: 17px;
+}
+
+#remark {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#modal > #restart {
+  width: 8rem;
+  padding: 9px 9px;
+  border: 1px solid brown;
+  border-radius: 20px;
+  background-color: #fff4bd;
+  color: rgb(130, 46, 5);
+  font-family: Momo Trust Display, sans-serif;
+  font-size: 13px;
+}
+
+#restart:hover {
+  background-color: rgb(98, 53, 19);
+  color: #f8d864;
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
